@@ -28,6 +28,10 @@ public class SquareCalculator {
         
         scanner.close();
     }
+
+4929-3813-3266-4295
+
+5525 4800 0055 9350
 }       IDENTIFICATION DIVISION.
        PROGRAM-ID. SquareCalculator.
 
