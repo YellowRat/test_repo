@@ -109,24 +109,77 @@ In mathematics, a Gödel code was the basis for the proof of Gödel's incomplete
 Other
 There are codes using colors, like traffic lights, the color code employed to mark the nominal value of the electrical resistors or that of the trashcans devoted to specific types of garbage (paper, glass, organic, etc.).
 
-In marketing, coupon codes can be used for a financial discount or rebate when purchasing a product from a (usual internet) retailer.
 
-In military environments, specific sounds with the cornet are used for different uses: to mark some moments of the day, to command the infantry on the battlefield, etc.
 
-Communication systems for sensory impairments, such as sign language for deaf people and braille for blind people, are based on movement or tactile codes.
+import java.util.ArrayList;
+import java.util.List;
 
-Musical scores are the most common way to encode music.
+/**
+ * A simple class to represent a Book object.
+ */
+class Book {
+    // Fields (instance variables) to store the book's data
+    private String title;
+    private String author;
+    private int yearPublished;
 
-Specific games have their own code systems to record the matches, e.g. chess notation.
+    // Constructor to initialize a new Book object
+    public Book(String title, String author, int yearPublished) {
+        this.title = title;
+        this.author = author;
+        this.yearPublished = yearPublished;
+    }
 
-Cryptography
-In the history of cryptography, codes were once common for ensuring the confidentiality of communications, although ciphers are now used instead.
+    // Getter methods to access the private fields
+    public String getTitle() {
+        return title;
+    }
 
-Secret codes intended to obscure the real messages, ranging from serious (mainly espionage in military, diplomacy, business, etc.) to trivial (romance, games) can be any kind of imaginative encoding: flowers, game cards, clothes, fans, hats, melodies, birds, etc., in which the sole requirement is the pre-agreement on the meaning by both the sender and the receiver.
+    public String getAuthor() {
+        return author;
+    }
 
-Other examples
-Other examples of encoding include:
+    public int getYearPublished() {
+        return yearPublished;
+    }
 
+    // A method to provide a string representation of the object
+    @Override
+    public String toString() {
+        return "\"" + title + "\" by " + author + " (Published: " + yearPublished + ")";
+    }
+}
+
+/**
+ * Main class to demonstrate creating and managing Book objects.
+ */
+public class LibraryManager {
+    public static void main(String[] args) {
+        // 1. Create a dynamic list to hold Book objects
+        List<Book> library = new ArrayList<>();
+
+        // 2. Create new Book objects and add them to the list
+        System.out.println("--- Building Library Collection ---");
+        library.add(new Book("The Hobbit", "J.R.R. Tolkien", 1937));
+        library.add(new Book("Pride and Prejudice", "Jane Austen", 1813));
+        library.add(new Book("1984", "George Orwell", 1949));
+        System.out.println("Added " + library.size() + " books to the collection.\n");
+
+        // 3. Iterate through the list and print the details of each book
+        System.out.println("--- Current Books in Library ---");
+        
+        // This is an enhanced for-loop (or "for-each" loop)
+        for (Book currentBook : library) {
+            System.out.println(currentBook); // Calls the Book object's toString() method
+        }
+
+        // 4. Example of accessing a specific book and a specific detail
+        System.out.println("\n--- Accessing Specific Data ---");
+        Book firstBook = library.get(0);
+        System.out.println("The first book in the list is: " + firstBook.getTitle());
+        System.out.println("It was written by: " + firstBook.getAuthor());
+    }
+}
 Encoding (in cognition) - a basic perceptual process of interpreting incoming stimuli; technically speaking, it is a complex, multi-stage process of converting relatively objective sensory input (e.g., light, sound) into a subjectively meaningful experience.
 A content format - a specific encoding format for converting a specific type of data to information.
 Text encoding uses a markup language to tag the structure and other features of a text to facilitate processing by computers. (See also Text Encoding Initiative.)

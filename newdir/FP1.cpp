@@ -572,6 +572,106 @@
 Гордість убивці (1 сезон) / Assassins Pride
 4171 571 744
 
+COBOL
+
+IDENTIFICATION DIVISION.
+PROGRAM-ID. HELLO-WORLD.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+    01 WS-MESSAGE PIC X(20) VALUE 'Hello, COBOL World!'.
+
+PROCEDURE DIVISION.
+MAIN-PARAGRAPH.
+    DISPLAY WS-MESSAGE.
+    STOP RUN.
+
+
+    COBOL
+
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. SALES-PROCESSOR.
+       AUTHOR. GEMINI-AI.
+
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT SALES-FILE ASSIGN TO 'SALESIN.DAT'
+               ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT REPORT-FILE ASSIGN TO 'SALESOUT.RPT'
+               ORGANIZATION IS LINE SEQUENTIAL.
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD  SALES-FILE
+           RECORD CONTAINS 80 CHARACTERS.
+       01  SALES-RECORD.
+           05 SR-CUSTOMER-ID      PIC X(10).
+           05 SR-CUSTOMER-NAME    PIC X(30).
+           05 SR-SALES-AMOUNT     PIC 9(5)V99.  *> 5 digits before decimal, 2 after
+           05 FILLER              PIC X(33).   *> Unused space
+
+       FD  REPORT-FILE
+           RECORD CONTAINS 100 CHARACTERS.
+       01  REPORT-RECORD          PIC X(100).
+
+       WORKING-STORAGE SECTION.
+      * Flag to control the main processing loop
+       01  WS-EOF-FLAG            PIC X(1) VALUE 'N'.
+           88  END-OF-FILE                  VALUE 'Y'.
+
+      * Variables for calculation and storage
+       01  WS-CALC-AREA.
+           05 WS-SALES-AMOUNT-NUM PIC 9(5)V99.  *> Numeric copy of input field
+           05 WS-BONUS-RATE       PIC V99 VALUE 0.05.   *> 5% bonus rate
+           05 WS-BONUS-AMOUNT     PIC 9(5)V99 VALUE ZEROS.
+           05 WS-TOTAL-PAY        PIC 9(6)V99 VALUE ZEROS.
+
+      * Layout for the output report line
+       01  WS-REPORT-LINE.
+           05 RL-CUSTOMER-ID      PIC X(10).
+           05 FILLER              PIC X(2) VALUE SPACES.
+           05 RL-CUSTOMER-NAME    PIC X(30).
+           05 FILLER              PIC X(2) VALUE SPACES.
+           05 RL-SALES-DISPLAY    PIC $$,$$$.99.
+           05 FILLER              PIC X(2) VALUE SPACES.
+           05 RL-BONUS-DISPLAY    PIC $$,$$$.99.
+           05 FILLER              PIC X(2) VALUE SPACES.
+           05 RL-TOTAL-PAY-DISPLAY PIC $$,$$$.99.
+           05 FILLER              PIC X(15) VALUE SPACES.
+
+
+       PROCEDURE DIVISION.
+       000-MAIN-LOGIC.
+           PERFORM 100-INITIALIZATION-ROUTINE
+           PERFORM 200-PROCESS-RECORDS
+               UNTIL END-OF-FILE
+           PERFORM 300-TERMINATION-ROUTINE
+           STOP RUN.
+
+       100-INITIALIZATION-ROUTINE.
+           OPEN INPUT SALES-FILE
+           OPEN OUTPUT REPORT-FILE
+           PERFORM 210-READ-FILE.  *> Prime the pump - read first record
+
+       200-PROCESS-RECORDS.
+           MOVE SPACES TO WS-REPORT-LINE  *> Clear the output line
+
+      * Move input data to the output line fields
+           MOVE SR-CUSTOMER-ID TO RL-CUSTOMER-ID
+           MOVE SR-CUSTOMER-NAME TO RL-CUSTOMER-NAME
+
+      * Move sales amount to a calculation area for computation
+           MOVE SR-SALES-AMOUNT TO WS-SALES-AMOUNT-NUM
+
+      * Calculation: If sales are over 1000, apply bonus
+           IF WS-SALES-AMOUNT-NUM > 1000
+               COMPUTE WS-BONUS-AMOUNT = WS-SALES-AMOUNT-NUM * WS-BONUS-RATE
+           ELSE
+               MOVE ZEROS TO WS-BONUS-AMOUNT
+           END-IF
+
+      * Calculate total payment
 Дивитись
 97 місце
 Кіберпанк: Біжучі краєм / Cyberpunk: Edgerunners
